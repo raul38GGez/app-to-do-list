@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
             gap: 10,
             height:80,
             marginHorizontal: sizes.margin_horizontal,
-            marginTop: -40,
+            marginTop: -35,
         },
         input:{
             backgroundColor: colors.white,
@@ -30,13 +30,15 @@ const styles = StyleSheet.create({
             fontSize: sizes.size_title,
             padding: sizes.size_medium,
             width: '80%',
+            height: 70,
             elevation: 2,
 
         },
         btn:{
-            backgroundColor: colors.purple_base,
+            backgroundColor: colors.purple_dark,
             borderRadius: sizes.border_radius,
             width: '18%',
+            height: 70,
             justifyContent: "center",
             alignItems: "center",
         },
