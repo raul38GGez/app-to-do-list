@@ -14,6 +14,7 @@ export default function Card({ ativo = false}){
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.circulo}>
+                {ativo && <Image style={styles.icon} source={require("../assets/check.png")}/>}
             </TouchableOpacity>
             <Text style={styles.texto}>Texto muito grande extremamente grande absurtdamente grande</Text>
             <TouchableOpacity >
@@ -75,6 +76,8 @@ const stylesConcluido = StyleSheet.create({
         borderWidth: 2,
         borderRadius: sizes.border_circle,
         backgroundColor: colors.green_base,
+        justifyContent: "center",
+        alignItems: "center",
     },
     texto:{
         color: colors.gray_600,
@@ -86,5 +89,9 @@ const stylesConcluido = StyleSheet.create({
         width: 30,
         height: 50,
         resizeMode: "contain",
+    },
+    icon:{
+        width: 18,
+        height: 18,
     },
 })
