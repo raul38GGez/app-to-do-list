@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native'
+import {Alert, ScrollView, StyleSheet, Text, View} from 'react-native'
 import Header from '../components/Header'
 import FormCadastro from "../components/FormCadastro";
 import BtnCont from "../components/BtnCont";
@@ -40,6 +40,18 @@ export default function HomeScreen(){
 
 
     function cadastrarTarefa(){
+        if (textCadastro.trim() === "") {
+            Alert.alert("Não é possivel adicionar tarefas vazias!")
+            return
+        }
+
+        for (let i = 0; i < lista.length; i++) {
+            if (lista[i].titulo.toLowerCase() === textCadastro.toLowerCase()) {
+                Alert.alert("Essa tarefa já existe!")
+                return
+            }
+        }
+
         var listaAux = [...lista];
 
         listaAux.push({
@@ -78,9 +90,15 @@ export default function HomeScreen(){
 
             <Search texto={textFiltro} setTexto={setTextFiltro} />
 
+
             {lista.length === 0 && <EmptyList/>}
 
-            {lista.map(function (item, index){
+
+            {lista
+                .sort(function (a, b){
+                    return a.concluido - b.concluido
+                })
+                .map(function (item, index){
                 if (item.titulo.toLowerCase().includes(textFiltro.toLowerCase())){
                     return(
                         <Card fnDesconcluir={() => desconcluirTarefa()} fnConcluir={() => concluirTarefa(index)} fnExcluir={() =>excluirTarefa(index)} key={index} texto={item.titulo} ativo={item.concluido}/>

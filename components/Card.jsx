@@ -78,7 +78,7 @@ const stylesConcluido = StyleSheet.create({
         borderColor: colors.green_base,
         borderWidth: 2,
         borderRadius: sizes.border_circle,
-        backgroundColor: colors.green_base,
+        backgroundColor: colors.white,
         justifyContent: "center",
         alignItems: "center",
     },
