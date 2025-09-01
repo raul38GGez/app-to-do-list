@@ -14,6 +14,11 @@ export default function HomeScreen(){
     const [totalCriado, setTotalCriado] = useState(0);
     const [totalConcluido, setTotalConcluido] = useState(0);
     const [textCadastro, setTextCadastro] = useState("");
+    const [textFiltro, setTextFiltro] = useState("");
+
+
+
+
 
 
     useEffect(() => {
@@ -32,6 +37,8 @@ export default function HomeScreen(){
 
     }, [lista]);
 
+
+
     function cadastrarTarefa(){
         var listaAux = [...lista];
 
@@ -45,29 +52,19 @@ export default function HomeScreen(){
         setLista(listaAux);
     }
 
-    function concluirTarefa(index){
-        var listaAux = [...lista];
-        if (listaAux[index].concluido === false) {
-            listaAux[index].concluido = true;
-            setLista(listaAux);
-        }
-    }
 
+
+    function concluirTarefa(index) {
+        var listaAux = [...lista];
+        listaAux[index].concluido = !listaAux[index].concluido;
+        setLista(listaAux);
+    }
 
     function excluirTarefa(index){
         var listaAux = [...lista];
         listaAux.splice(index, 1)
         setLista(listaAux);
     }
-
-    function desconcluirTarefa(index){
-        var listaAux = [...lista];
-        if (listaAux[index].concluido === true) {
-            listaAux[index].concluido = false;
-            setLista(listaAux);
-        }
-    }
-
 
     return(
         <ScrollView>
@@ -78,15 +75,20 @@ export default function HomeScreen(){
                 <BtnCont titulo={"Tarefas Criadas"} numero={totalCriado}/>
                 <BtnCont titulo={"Concluidas"} numero={totalConcluido} isGreen={true}/>
             </View>
-            <Search/>
+
+            <Search texto={textFiltro} setTexto={setTextFiltro} />
 
             {lista.length === 0 && <EmptyList/>}
 
             {lista.map(function (item, index){
-                return(
-                    <Card fnDesconcluir={() => desconcluirTarefa()} fnConcluir={() => concluirTarefa(index)} fnExcluir={() =>excluirTarefa(index)} key={index} texto={item.titulo} ativo={item.concluido}/>
-                )
+                if (item.titulo.toLowerCase().includes(textFiltro.toLowerCase())){
+                    return(
+                        <Card fnDesconcluir={() => desconcluirTarefa()} fnConcluir={() => concluirTarefa(index)} fnExcluir={() =>excluirTarefa(index)} key={index} texto={item.titulo} ativo={item.concluido}/>
+                    )
+                }
             })}
+
+
 
         </ScrollView>
     )
