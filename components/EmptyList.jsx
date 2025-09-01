@@ -20,12 +20,13 @@ const styles = StyleSheet.create({
         marginVertical: sizes.padding_big,
     },
     titulo:{
-      fontWeight: "bold",
+      fontWeight: "bold", textAlign: "center",
       fontSize: sizes.size_title,
       color: colors.gray_500,
       marginTop: sizes.padding_medium,
     },
     subtitulo:{
+        textAlign: "center",
         fontSize: sizes.size_medium,
         color: colors.gray_500,
     }

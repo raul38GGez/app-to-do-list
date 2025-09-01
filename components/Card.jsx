@@ -2,22 +2,25 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import sizes from "../design/sizes";
 import colors from "../design/colors";
 
-export default function Card({ ativo = false}){
+export default function Card({
+        ativo = false,
+        texto = '',
+        fnConcluir = null,
+        fnExcluir = null,
+        }) {
     let styles = stylesAtivo
 
     if (ativo){
         styles = stylesConcluido
     }
 
-
-
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.circulo}>
+            <TouchableOpacity onPress={fnConcluir} style={styles.circulo}>
                 {ativo && <Image style={styles.icon} source={require("../assets/check.png")}/>}
             </TouchableOpacity>
-            <Text style={styles.texto}>Texto muito grande extremamente grande absurtdamente grande</Text>
-            <TouchableOpacity >
+            <Text style={styles.texto}>{texto}</Text>
+            <TouchableOpacity onPress={fnExcluir} >
                 <Image style={styles.lixo} source={require('../assets/TrashRegular.png')}/>
             </TouchableOpacity>
         </View>
